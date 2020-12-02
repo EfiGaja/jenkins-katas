@@ -52,7 +52,7 @@ pipeline {
           steps {
             skipDefaultCheckout true
             unstash 'code'
-            sh 'ci/build-app.sh'
+           // sh 'ci/build-app.sh'
             stash(name: 'code', excludes: '.git')
             archiveArtifacts 'app/build/libs/'
             sh 'ls -al'
