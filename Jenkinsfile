@@ -15,7 +15,7 @@ pipeline {
     stage('Dev branch build') {
       when { branch "dev" }
       steps {
-        sh 'echo "On dev branch"'
+        sh 'echo "On dev branch, with more editing again."'
       }
     }
 
