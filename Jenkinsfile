@@ -8,14 +8,14 @@ pipeline {
     stage('Master branch build') {
       when { branch "master" }
       steps {
-        sh 'echo "On master branch"'
+        sh 'echo "On master branch, push test"'
       }
     }
 
     stage('Dev branch build') {
       when { branch "dev" }
       steps {
-        sh 'echo "On dev branch"'
+        sh 'echo "On dev branch, with more editing again."'
       }
     }
 
@@ -66,7 +66,10 @@ pipeline {
             docker {
               image 'gradle:jdk11'
             }
-
+          }
+          when {
+            beforeAgent true
+            branch 'master'
           }
           post {
             always {
@@ -91,7 +94,7 @@ pipeline {
       }
       steps {
         unstash 'code' //unstash the repository code
-        sh 'ci/build-docker.sh'
+        //sh 'ci/build-docker.sh'
         //input message: 'Approve push to Dockerhub?', ok: 'Yes'
         //sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin' //login to docker hub with the credentials above
         //sh 'ci/push-docker.sh'
